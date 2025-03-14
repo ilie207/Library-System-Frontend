@@ -1,11 +1,16 @@
-import styles from "./page.module.css";
-import BookList from "./components/BookList";
+import Header from "./components/Header";
+import FeaturedBooks from "./components/FeaturedBooks";
+import NewBooks from "./components/NewBooks";
+import NavBar from "./components/NavBar";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <BookList />
+    <div>
+      <Header />
+      <main>
+        <NavBar />
+        <FeaturedBooks />
+        <NewBooks />
       </main>
     </div>
   );

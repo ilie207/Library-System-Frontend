@@ -1,11 +1,14 @@
+import "../../styles/books.css";
+
 export default function BookCard({ book }) {
   return (
-    <div className="border rounded-lg p-4 shadow-md">
-      <h2 className="text-lg font-bold">{book.title}</h2>
-      <p className="text-gray-600">Author: {book.author}</p>
-      <p>
-        <strong>Available:</strong> {book.available} / {book.total_copies}
-      </p>
+    <div className="book3d">
+      <img src={book.coverImageUrl || "/default-cover.jpg"} alt={book.title} />
+      <div className="bookInfo">
+        <h3>{book.title}</h3>
+        <p>{book.author}</p>
+        <p>{book.description}</p>
+      </div>
     </div>
   );
 }
