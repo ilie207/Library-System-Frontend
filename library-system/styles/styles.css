@@ -1,0 +1,78 @@
+/*Header*/
+header {
+  background-color: #030304;
+  padding: 20px;
+  text-align: center;
+  max-height: 100vh;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.title_styling {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.no_margin {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Navigation Styles */
+nav {
+  margin-bottom: 20px;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin: auto auto;
+}
+.navbar li {
+  margin-right: 10px;
+}
+
+.container-style {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  margin: 10px auto;
+  justify-content: center;
+}
+
+/*Custom Button*/
+.custom_button {
+  padding: 8px 20px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  max-width: 250px;
+}
+
+.custom_button:hover {
+  background-color: #fd7e14;
+}

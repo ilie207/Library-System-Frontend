@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { getBooks } from "../../lib/api";
 import BookCard from "./BookCard";
@@ -27,12 +28,15 @@ export default function BookList() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {books.length > 0 ? (
-        books.map((book) => <BookCard key={book.id} book={book} />)
-      ) : (
-        <p>No books available.</p>
-      )}
-    </div>
+    <section className="featured">
+      <h2>All Books</h2>
+      <div className="bookGrid">
+        {books.length > 0 ? (
+          books.map((book) => <BookCard key={book.id} book={book} />)
+        ) : (
+          <p>No books available.</p>
+        )}
+      </div>
+    </section>
   );
 }
