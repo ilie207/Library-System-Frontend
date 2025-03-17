@@ -14,3 +14,31 @@ export async function getBooks() {
     return [];
   }
 }
+
+export async function getUsers() {
+  try {
+    const response = await fetch("/api/users");
+    if (!response.ok) throw new Error("Failed to fetch users");
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return [];
+  }
+}
+
+export async function updateUser(userData) {
+  try {
+    const response = await fetch("/api/users", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!response.ok) throw new Error("Failed to update user");
+    return await response.json();
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error;
+  }
+}
