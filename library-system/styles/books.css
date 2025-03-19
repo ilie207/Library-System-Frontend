@@ -1,7 +1,7 @@
 /*Books 3D effect*/
-.featured {
+.specialSection {
   padding: 2rem;
-  background: linear-gradient(to right, #f3f4f6, #ffffff);
+  background: linear-gradient(to left, #ffffff, #ffffff);
 }
 
 .bookGrid {
@@ -37,7 +37,8 @@
   transform: rotateY(20deg);
   box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.5s ease;
-  background: #f5f5f5;
+  background: #ffffff;
+  border-radius: 8px;
 }
 
 .book3d:hover img {
@@ -52,58 +53,63 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/*New books*/
-.newBooks {
-  padding: 2rem;
-  background: linear-gradient(to left, #f8f9fa, #ffffff);
-}
-
-.newBooksGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2.5rem;
-  padding: 2rem 0;
-}
-
-.newBook3d {
-  transform-style: preserve-3d;
-  transition: all 0.5s ease;
-}
-
-.bookWrapper {
-  position: relative;
-  transform: translateZ(50px);
-}
-
-.newBook3d:hover {
-  transform: rotateX(10deg) rotateY(-20deg);
-}
-
-.newBook3d img {
-  width: 100%;
-  height: auto;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-
 .ribbon {
   position: absolute;
-  top: -10px;
-  right: -10px;
-  background: #ff4757;
+  top: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  background: #ff5733;
   color: white;
-  padding: 5px 15px;
-  border-radius: 20px;
-  transform: translateZ(60px);
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  border-radius: 0 0 0 8px;
+  transform: rotate(45deg) translate(20px, -20px);
+  transform-origin: top right;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.bookDetails {
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  margin-top: -20px;
-  position: relative;
-  transform: translateZ(30px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.book-page {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.book-header {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.book-header .book3d {
+  margin: 0;
+  height: auto;
+}
+
+.book-header .bookInfo {
+  transform: none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.availability-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.available {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.unavailable {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.book-link {
+  text-decoration: none;
+  color: inherit;
 }

@@ -1,5 +1,4 @@
 import Signup from "../components/Signup";
-import "../../styles/auth.css";
 
 export default function SignupPage() {
   return (

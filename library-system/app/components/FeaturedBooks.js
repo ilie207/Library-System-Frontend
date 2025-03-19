@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { getBooks } from "../../lib/api";
 import BookCard from "./BookCard";
-import "../../styles/books.css";
 
 const FeaturedBooks = () => {
   const [highlightedBooks, setHighlightedBooks] = useState([]);
@@ -22,7 +21,7 @@ const FeaturedBooks = () => {
   };
 
   return (
-    <section className="featured">
+    <section className="specialSection">
       <h2>Featured Books</h2>
       <div className="bookGrid">
         {highlightedBooks.map((book) => (

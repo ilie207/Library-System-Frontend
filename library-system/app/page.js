@@ -1,6 +1,5 @@
 import Login from "./components/Login";
 import Link from "next/link";
-import "../styles/auth.css";
 
 export default function Home() {
   return (
