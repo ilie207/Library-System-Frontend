@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("student");
+  const [role, setRole] = useState("Student");
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -22,7 +22,7 @@ export default function Login() {
       console.error("Error logging in:", error.message);
     } else {
       router.push(
-        role === "librarian" ? "/librarian-dashboard" : "/student-dashboard"
+        role === "Librarian" ? "/librarian-dashboard" : "/student-dashboard"
       );
     }
   };
@@ -30,8 +30,8 @@ export default function Login() {
   return (
     <form onSubmit={handleLogin}>
       <select value={role} onChange={(e) => setRole(e.target.value)}>
-        <option value="student">Student</option>
-        <option value="librarian">Librarian</option>
+        <option value="Student">Student</option>
+        <option value="Librarian">Librarian</option>
       </select>
       <input
         type="email"

@@ -10,36 +10,37 @@ export const AuthProvider = ({ children }) => {
   const [role, setRole] = useState(null);
 
   useEffect(() => {
-    const session = supabase.auth.getSession();
-    setUser(session?.user ?? null);
+    const fetchUserRole = async (email) => {
+      const { data, error } = await supabase
+        .from("users")
+        .select("role")
+        .eq("email", email)
+        .single();
 
-    if (session?.user) {
-      fetchUserRole(session.user.id);
-    }
-
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null);
-        if (session?.user) {
-          fetchUserRole(session.user.id);
-        }
-      }
-    );
-
-    return () => {
-      authListener?.unsubscribe();
+      if (data) setRole(data.role);
     };
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        setUser(session.user);
+        fetchUserRole(session.user.email);
+      }
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        setUser(session.user);
+        fetchUserRole(session.user.email);
+      } else {
+        setUser(null);
+        setRole(null);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
-
-  const fetchUserRole = async (userId) => {
-    const { data, error } = await supabase
-      .from("users")
-      .select("role")
-      .eq("id", userId)
-      .single();
-
-    if (data) setRole(data.role);
-  };
 
   return (
     <AuthContext.Provider value={{ user, role }}>
