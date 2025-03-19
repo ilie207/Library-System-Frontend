@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar";
 
 export default function LibrarianDashboard() {
   return (
-    <ProtectedRoute allowedRole="librarian">
+    <ProtectedRoute allowedRole="Librarian">
       <div>
         <NavBar />
         <h1>Librarian Dashboard</h1>

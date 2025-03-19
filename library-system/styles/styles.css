@@ -76,3 +76,16 @@ nav {
 .custom_button:hover {
   background-color: #fd7e14;
 }
+
+/*Unauthorised Page*/
+.unauthorised-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(to right, #141e30, #243b55);
+  color: white;
+}
