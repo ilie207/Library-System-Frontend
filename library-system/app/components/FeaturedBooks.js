@@ -9,13 +9,16 @@ const FeaturedBooks = () => {
   const [highlightedBooks, setHighlightedBooks] = useState([]);
 
   useEffect(() => {
-    fetchRandomBooks();
+    fetchTopAvailableBooks();
   }, []);
 
-  const fetchRandomBooks = async () => {
+  const fetchTopAvailableBooks = async () => {
     const allBooks = await getBooks();
-    const randomBooks = allBooks.sort(() => Math.random() - 0.5).slice(0, 3);
-    setHighlightedBooks(randomBooks);
+    // Sort books by availability
+    const topBooks = allBooks
+      .sort((a, b) => b.available - a.available)
+      .slice(0, 3);
+    setHighlightedBooks(topBooks);
   };
 
   return (

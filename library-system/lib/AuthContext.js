@@ -8,25 +8,31 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserRole = async (email) => {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("users")
         .select("role")
         .eq("email", email)
         .single();
 
       if (data) setRole(data.role);
+      setLoading(false);
     };
 
+    // Check current session
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
         setUser(session.user);
         fetchUserRole(session.user.email);
+      } else {
+        setLoading(false);
       }
     });
 
+    // Listen for auth changes
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -36,6 +42,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         setUser(null);
         setRole(null);
+        setLoading(false);
       }
     });
 
@@ -43,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, role }}>
+    <AuthContext.Provider value={{ user, role, loading }}>
       {children}
     </AuthContext.Provider>
   );
