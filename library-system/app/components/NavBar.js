@@ -1,13 +1,26 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { useAuth } from "../../lib/AuthContext";
 
 export default function NavBar() {
+  const { user, role } = useAuth();
+
   return (
     <nav>
       <ul className="container-style">
-        <Link href="/" className="custom_button">
-          Home
-        </Link>
+        {user && (
+          <Link
+            href={
+              role === "Librarian"
+                ? "/librarian-dashboard"
+                : "/student-dashboard"
+            }
+            className="custom_button"
+          >
+            Dashboard
+          </Link>
+        )}
         <Link href="/allBooks" className="custom_button">
           All Books
         </Link>
