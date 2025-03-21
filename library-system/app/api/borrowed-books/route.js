@@ -3,12 +3,12 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   const body = await request.json();
 
-  // Calculate return date (30 days from now)
+  // 30 days return date
   const returnDate = new Date();
   returnDate.setDate(returnDate.getDate() + 30);
 
   try {
-    // First check if already borrowed
+    // has the book been already borrowed
     const checkResponse = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/borrowed_books?user_email=eq.${body.user_email}&book_id=eq.${body.book_id}&status=eq.borrowed`,
       {
@@ -28,7 +28,7 @@ export async function POST(request) {
       );
     }
 
-    // Proceed with borrowing
+    // allow borrowing
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/borrowed-books`,
       {
