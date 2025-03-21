@@ -4,21 +4,19 @@ import { useState, useEffect } from "react";
 export default function BorrowBook({ user, book, onBorrowSuccess }) {
   const [hasBorrowed, setHasBorrowed] = useState(false);
 
-  useEffect(() => {
-    if (user?.email) {
-      checkBorrowStatus();
-    }
-  }, [user?.email, book.id]);
-
   const checkBorrowStatus = async () => {
     if (!user?.email) return;
 
     const response = await fetch(
-      `/api/borrowed-books/check?email=${user.email}&bookId=${book.id}`
+      `/api/borrowed-books?email=${user.email}&bookId=${book.id}`
     );
     const data = await response.json();
     setHasBorrowed(data.hasBorrowed);
   };
+
+  useEffect(() => {
+    checkBorrowStatus();
+  }, [user?.email, book.id]);
 
   const handleBorrow = async () => {
     const response = await fetch(`/api/borrowed-books`, {
@@ -32,7 +30,7 @@ export default function BorrowBook({ user, book, onBorrowSuccess }) {
     const data = await response.json();
 
     if (response.ok) {
-      setHasBorrowed(true);
+      await checkBorrowStatus();
       onBorrowSuccess();
     } else {
       alert(data.error || "Failed to borrow book");
