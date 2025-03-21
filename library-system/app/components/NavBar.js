@@ -2,6 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useAuth } from "../../lib/AuthContext";
+import SignOutButton from "./SignOutButton";
 
 export default function NavBar() {
   const { user, role } = useAuth();
@@ -24,6 +25,7 @@ export default function NavBar() {
         <Link href="/allBooks" className="custom_button">
           All Books
         </Link>
+        <SignOutButton />
       </ul>
     </nav>
   );

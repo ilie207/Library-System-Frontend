@@ -50,13 +50,15 @@ export default function BookPage({ params }) {
                 ? `${book.available} Available`
                 : "Out of Stock"}
             </div>
-            {user && role === "Student" && (
-              <BorrowBook
-                user={user}
-                book={book}
-                onBorrowSuccess={fetchBookDetails.bind(null, bookId)}
-              />
-            )}
+            <div>
+              {user && role === "Student" && (
+                <BorrowBook
+                  user={user}
+                  book={book}
+                  onBorrowSuccess={fetchBookDetails.bind(null, bookId)}
+                />
+              )}
+            </div>
             <p className="genre">Genre: {book.genre}</p>
             <h3>Description</h3>
             <p>{book.description}</p>

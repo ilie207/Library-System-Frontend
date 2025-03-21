@@ -59,6 +59,11 @@ nav {
   justify-content: center;
 }
 
+.nav-right {
+  margin-left: auto;
+  padding-right: 20px;
+}
+
 /*Custom Button*/
 .custom_button {
   padding: 8px 20px;
@@ -97,4 +102,15 @@ nav {
   padding: 20px;
   background: linear-gradient(to right, #141e30, #243b55);
   color: white;
+}
+
+/*Sign out Button*/
+.signout-button {
+  background-color: #ff5733;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }

@@ -10,7 +10,7 @@ export default function ProtectedRoute({ children, allowedRole }) {
   useEffect(() => {
     if (!loading) {
       if (!user) {
-        router.push("/login");
+        router.push("/");
       } else if (role.toLowerCase() !== allowedRole.toLowerCase()) {
         router.push("/unauthorized");
       }
