@@ -6,7 +6,7 @@ export async function GET(request) {
   const bookId = searchParams.get("bookId");
 
   try {
-    // Query Supabase directly instead of using Edge Function
+    // query to check if the book has been borrowed by the user
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/borrowed_books?user_email=eq.${email}&book_id=eq.${bookId}&status=eq.borrowed`,
       {
