@@ -6,6 +6,7 @@ import config from "@/lib/config";
 import { getBooks } from "../../../lib/api";
 import Header from "../../components/Header";
 import NavBar from "../../components/NavBar";
+import BorrowBook from "../../components/BorrowBook";
 
 export default function BookPage({ params }) {
   const [book, setBook] = useState(null);
@@ -49,6 +50,13 @@ export default function BookPage({ params }) {
                 ? `${book.available} Available`
                 : "Out of Stock"}
             </div>
+            {user && role === "Student" && (
+              <BorrowBook
+                user={user}
+                book={book}
+                onBorrowSuccess={fetchBookDetails.bind(null, bookId)}
+              />
+            )}
             <p className="genre">Genre: {book.genre}</p>
             <h3>Description</h3>
             <p>{book.description}</p>

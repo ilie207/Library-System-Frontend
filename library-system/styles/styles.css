@@ -77,6 +77,15 @@ nav {
   background-color: #fd7e14;
 }
 
+.custom_button.reserved {
+  background-color: #4caf50;
+  cursor: default;
+}
+
+.custom_button.reserved span {
+  margin-right: 8px;
+}
+
 /*Unauthorised Page*/
 .unauthorised-container {
   display: flex;
