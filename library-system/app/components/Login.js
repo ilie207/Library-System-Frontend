@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { useRouter } from "next/navigation";
@@ -20,10 +19,12 @@ export default function Login() {
 
     if (error) {
       console.error("Error logging in:", error.message);
+      alert(error.message);
     } else {
-      router.push(
-        role === "Librarian" ? "/librarian-dashboard" : "/student-dashboard"
-      );
+      const redirectPath =
+        role === "Librarian" ? "/librarian-dashboard" : "/student-dashboard";
+      router.push(redirectPath);
+      router.refresh();
     }
   };
 
@@ -38,12 +39,14 @@ export default function Login() {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
       />
       <button type="submit">Login</button>
     </form>
