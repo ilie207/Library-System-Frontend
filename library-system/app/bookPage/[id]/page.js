@@ -34,7 +34,7 @@ export default function BookPage({ params }) {
           <div className="book3d">
             <IKImage
               urlEndpoint={config.env.imagekit.urlEndpoint}
-              path={`${book.cover_image}.png`}
+              path={`${book.cover_image}`}
               alt={book.title}
             />
           </div>
