@@ -96,3 +96,45 @@
 .auth-link:hover {
   color: #64b5f6;
 }
+
+/*Add Book Page*/
+.add-book-form {
+  width: 90%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+}
+
+.add-book-form input,
+.add-book-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 4px;
+  color: #000000;
+  font-size: 14px;
+}
+
+/*Image upload*/
+.image-upload-section {
+  margin: 1rem 0;
+}
+
+.cover-preview {
+  max-width: 200px;
+  margin-top: 1rem;
+  border-radius: 4px;
+}
+
+.upload-container {
+  padding: 1rem;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  text-align: center;
+}

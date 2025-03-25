@@ -1,16 +1,16 @@
 import { NextResponse } from "next/server";
 
+const headers = {
+  "Content-Type": "application/json",
+  apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+};
+
 export async function GET() {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/get-books`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-      }
+      { headers }
     );
 
     const data = await response.json();
@@ -21,4 +21,20 @@ export async function GET() {
       { status: 500 }
     );
   }
+}
+
+export async function POST(request) {
+  const bookData = await request.json();
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/get-books`,
+    {
+      method: "POST",
+      headers,
+      body: JSON.stringify(bookData),
+    }
+  );
+
+  const data = await response.json();
+  return NextResponse.json(data);
 }

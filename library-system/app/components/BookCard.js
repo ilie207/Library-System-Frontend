@@ -4,7 +4,7 @@ import config from "@/lib/config";
 import Link from "next/link";
 
 export default function BookCard({ book }) {
-  const imagePath = `${book.cover_image}.png`;
+  const imagePath = `${book.cover_image}`;
 
   return (
     <Link href={`/bookPage/${book.id}`} className="book-link">
