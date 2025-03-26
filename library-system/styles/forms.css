@@ -54,15 +54,30 @@
 
 .form-tabs input,
 .form-tabs textarea,
-.form-tabs select {
+.form-tabs select,
+.edit-form-tabs input,
+.edit-form-tabs textarea,
+.edit-form-tabs select {
   width: 100%;
   padding: 12px;
   margin: 8px 0;
   background: rgba(255, 255, 255, 0.07);
   border: none;
   border-radius: 4px;
-  color: #ffffff;
   font-size: 14px;
+}
+
+.form-tabs input,
+.form-tabs textarea,
+.form-tabs select {
+  color: #ffffff;
+}
+
+.edit-form-tabs input,
+.edit-form-tabs textarea,
+.edit-form-tabs select {
+  color: #141e30;
+  border-color: #141e30;
 }
 
 .form-tabs button {
