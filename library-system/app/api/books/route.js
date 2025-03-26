@@ -38,3 +38,19 @@ export async function POST(request) {
   const data = await response.json();
   return NextResponse.json(data);
 }
+
+export async function PUT(request) {
+  const bookData = await request.json();
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/get-books`,
+    {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(bookData),
+    }
+  );
+
+  const data = await response.json();
+  return NextResponse.json(data);
+}
