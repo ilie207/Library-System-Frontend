@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import ImageUpload from "./ImageUpload";
 import config from "@/lib/config";
 
@@ -12,6 +13,7 @@ export default function AddBook() {
     genre: "",
     description: "",
   });
+  const router = useRouter();
 
   const urlEndpoint = config.env.imagekit.urlEndpoint;
 
@@ -30,6 +32,7 @@ export default function AddBook() {
     });
 
     if (response.ok) {
+      alert("Book added successfully!");
       setBookData({
         title: "",
         author: "",
@@ -38,11 +41,12 @@ export default function AddBook() {
         genre: "",
         description: "",
       });
+      router.refresh();
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="add-book-form">
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Title"
@@ -76,10 +80,11 @@ export default function AddBook() {
         required
       />
       <div className="image-upload-section">
-        <label>Book Cover</label>
+        <label className="white">Book Cover</label>
         <ImageUpload
           onUploadSuccess={handleImageUpload}
           fileName={bookData.cover_image}
+          key={bookData.cover_image}
         />
         {bookData.cover_image && (
           <img
@@ -104,9 +109,7 @@ export default function AddBook() {
         }
         required
       />
-      <button type="submit" className="custom_button">
-        Add Book
-      </button>
+      <button type="submit">Add Book</button>
     </form>
   );
 }

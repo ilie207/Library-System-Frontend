@@ -35,7 +35,7 @@ export default function ImageUpload({ onUploadSuccess, filename }) {
   };
 
   return (
-    <div className="upload-container">
+    <div className="form-tabs">
       <ImageKitProvider
         publicKey={config.env.imagekit.publicKey}
         urlEndpoint={config.env.imagekit.urlEndpoint}
