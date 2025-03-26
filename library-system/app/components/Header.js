@@ -1,6 +1,8 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import SignOutButton from "./SignOutButton";
+import Welcome from "./Welcome";
 
 const Header = () => {
   return (
@@ -13,9 +15,11 @@ const Header = () => {
         />
       </Head>
       <header>
+        <Welcome />
         <Link className="title_styling" href="/">
           Learner's Library
         </Link>
+        <SignOutButton />
       </header>
     </>
   );

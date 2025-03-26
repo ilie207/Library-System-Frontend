@@ -114,3 +114,37 @@ nav {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.sign-out-wrapper {
+  margin-left: auto;
+}
+
+.sign-out {
+  color: white;
+  background: none;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  transition: all 0.1s;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.sign-out:hover {
+  background-color: grey;
+  border-radius: 4px;
+}
+
+.sign-out > span {
+  margin-right: 0.5em;
+}
+
+/*Welcome message*/
+.welcome-container {
+  margin-right: auto;
+}
+
+.welcome-text {
+  font-size: 15px;
+  color: white;
+}
