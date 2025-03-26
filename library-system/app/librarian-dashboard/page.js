@@ -10,8 +10,6 @@ export default function LibrarianDashboard() {
       <Header />
       <div>
         <NavBar />
-        <h1>Librarian Dashboard</h1>
-        <p>Welcome, Librarian!</p>
         <FeaturedBooks />
         <NewBooks />
       </div>

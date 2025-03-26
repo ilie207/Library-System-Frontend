@@ -28,7 +28,7 @@ export default function BookList() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <section className="featured">
+    <section className="specialSection">
       <h2>All Books</h2>
       <div className="bookGrid">
         {books.length > 0 ? (

@@ -13,8 +13,10 @@ export default function SignOutButton() {
   };
 
   return (
-    <button onClick={handleSignOut} className="signout-button">
-      Sign Out
-    </button>
+    <div className="sign-out-wrapper">
+      <button onClick={handleSignOut} className="sign-out">
+        Sign Out
+      </button>
+    </div>
   );
 }
