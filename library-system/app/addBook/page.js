@@ -6,11 +6,17 @@ import AddBook from "../components/AddBook";
 export default function LibrarianDashboard() {
   return (
     <ProtectedRoute allowedRole="Librarian">
+      <div className="form-background"></div>
       <Header />
-      <div>
+      <main>
         <NavBar />
-        <AddBook />
-      </div>
+        <div className="form-container">
+          <h2>Add Book</h2>
+          <div className="form-tabs">
+            <AddBook />
+          </div>
+        </div>
+      </main>
     </ProtectedRoute>
   );
 }

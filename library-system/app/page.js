@@ -4,14 +4,14 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <div className="auth-background">
+      <div className="form-background">
         <div className="shape"></div>
         <div className="shape"></div>
       </div>
       <main>
-        <div className="auth-container">
+        <div className="form-container">
           <h2>Welcome to Learner's Library</h2>
-          <div className="auth-tabs">
+          <div className="form-tabs">
             <Login />
           </div>
           <div className="signup-link">
