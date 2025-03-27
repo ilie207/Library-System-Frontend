@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+// POST = borrow a book
 export async function POST(request) {
   const body = await request.json();
 
@@ -8,27 +9,7 @@ export async function POST(request) {
   returnDate.setDate(returnDate.getDate() + 30);
 
   try {
-    // has the book been already borrowed
-    const checkResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/borrowed_books?user_email=eq.${body.user_email}&book_id=eq.${body.book_id}&status=eq.borrowed`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-      }
-    );
-
-    const existingBorrows = await checkResponse.json();
-    if (existingBorrows.length > 0) {
-      return NextResponse.json(
-        { error: "You have already borrowed this book" },
-        { status: 400 }
-      );
-    }
-
-    // allow borrowing
+    // calling the edge-function
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/borrowed-books`,
       {
@@ -61,26 +42,66 @@ export async function POST(request) {
   }
 }
 
+// GET = checking if a user has borrowed a book OR get statistics
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const email = searchParams.get("email");
   const bookId = searchParams.get("bookId");
+  const stats = searchParams.get("stats");
 
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/borrowed_books?user_email=eq.${email}&book_id=eq.${bookId}&status=eq.borrowed`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
-        },
-      }
-    );
+    // (if) stats parameter is present then get statistics
+    if (stats === "true") {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/borrowed-books`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+          },
+        }
+      );
 
-    const data = await response.json();
-    return NextResponse.json({ hasBorrowed: data.length > 0 });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to fetch statistics");
+      }
+
+      const data = await response.json();
+      return NextResponse.json(data);
+    }
+
+    // (else) check if a specific user has borrowed a specific book
+    else if (email && bookId) {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/borrowed_books?user_email=eq.${email}&book_id=eq.${bookId}&status=eq.borrowed`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+      return NextResponse.json({ hasBorrowed: data.length > 0 });
+    }
+
+    // (if) neither then it's an error
+    else {
+      return NextResponse.json(
+        { error: "Missing required parameters" },
+        { status: 400 }
+      );
+    }
   } catch (error) {
-    return NextResponse.json({ hasBorrowed: false });
+    console.error("Error:", error);
+    return NextResponse.json(
+      { error: "Failed to process request" },
+      { status: 500 }
+    );
   }
 }

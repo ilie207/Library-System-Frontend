@@ -1,8 +1,7 @@
 import ProtectedRoute from "../components/ProtectedRoute";
-import FeaturedBooks from "../components/FeaturedBooks";
-import NewBooks from "../components/NewBooks";
 import NavBar from "../components/NavBar";
 import Header from "../components/Header";
+import LibraryOverview from "../components/LibraryOverview";
 
 export default function LibrarianDashboard() {
   return (
@@ -10,8 +9,7 @@ export default function LibrarianDashboard() {
       <Header />
       <div>
         <NavBar />
-        <FeaturedBooks />
-        <NewBooks />
+        <LibraryOverview />
       </div>
     </ProtectedRoute>
   );
