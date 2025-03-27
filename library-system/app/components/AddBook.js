@@ -7,16 +7,21 @@ import { fetchWithCSRF } from "../../lib/fetchWithCSRF";
 import { sanitiseObject } from "../../lib/sanitise";
 
 export default function AddBook() {
-  const [bookData, setBookData] = useState({
+  const initialBookData = {
     title: "",
     author: "",
     total_copies: 0,
     cover_image: "",
     genre: "",
     description: "",
-  });
-  const router = useRouter();
+  };
 
+  const [bookData, setBookData] = useState(initialBookData);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const router = useRouter();
   const urlEndpoint = config.env.imagekit.urlEndpoint;
 
   const handleImageUpload = (imageUrl) => {
@@ -53,6 +58,11 @@ export default function AddBook() {
 
   return (
     <form onSubmit={handleSubmit}>
+      {successMessage && (
+        <div className="success-message">{successMessage}</div>
+      )}
+      {error && <div className="error-message">{error}</div>}
+
       <input
         type="text"
         placeholder="Title"
@@ -115,7 +125,9 @@ export default function AddBook() {
         }
         required
       />
-      <button type="submit">Add Book</button>
+      <button type="submit" disabled={isLoading}>
+        {isLoading ? "Adding Book..." : "Add Book"}
+      </button>
     </form>
   );
 }

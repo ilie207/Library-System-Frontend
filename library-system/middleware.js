@@ -30,7 +30,11 @@ export async function middleware(req) {
     const csrfToken = req.headers.get("X-CSRF-Token");
     const csrfSecret = req.cookies.get("csrf_secret")?.value;
 
-    if (!csrfToken || !csrfSecret || !verifyToken(csrfSecret, csrfToken)) {
+    if (
+      !csrfToken ||
+      !csrfSecret ||
+      !(await verifyToken(csrfSecret, csrfToken))
+    ) {
       return new NextResponse(
         JSON.stringify({ message: "Invalid CSRF token" }),
         {

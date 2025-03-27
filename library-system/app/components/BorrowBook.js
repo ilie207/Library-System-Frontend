@@ -4,6 +4,8 @@ import { fetchWithCSRF } from "../../lib/fetchWithCSRF";
 
 export default function BorrowBook({ user, book, onBorrowSuccess }) {
   const [hasBorrowed, setHasBorrowed] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const checkBorrowStatus = async () => {
     if (!user?.email) return;
@@ -53,8 +55,12 @@ export default function BorrowBook({ user, book, onBorrowSuccess }) {
   }
 
   return book.available > 0 ? (
-    <button onClick={handleBorrow} className="custom_button">
-      Borrow This Book
+    <button
+      onClick={handleBorrow}
+      className="custom_button"
+      disabled={isLoading}
+    >
+      {isLoading ? "Processing..." : "Borrow This Book"}
     </button>
   ) : null;
 }

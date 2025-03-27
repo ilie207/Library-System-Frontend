@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
 import { generateToken } from "../../../../lib/csrf";
-import { cookies } from "next/headers";
 
 export async function GET() {
-  const { secret, token } = generateToken();
+  const { secret, token } = await generateToken();
 
   const response = NextResponse.json({ csrfToken: token });
   // storing the secret in an HTTP-only cookie
