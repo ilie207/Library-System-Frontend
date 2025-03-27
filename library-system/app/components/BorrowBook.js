@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { fetchWithCSRF } from "../../lib/fetchWithCSRF";
 
 export default function BorrowBook({ user, book, onBorrowSuccess }) {
   const [hasBorrowed, setHasBorrowed] = useState(false);
@@ -19,21 +20,27 @@ export default function BorrowBook({ user, book, onBorrowSuccess }) {
   }, [user?.email, book.id]);
 
   const handleBorrow = async () => {
-    const response = await fetch(`/api/borrowed-books`, {
-      method: "POST",
-      body: JSON.stringify({
-        user_email: user.email,
-        book_id: book.id,
-      }),
-    });
+    setIsLoading(true);
+    try {
+      const response = await fetchWithCSRF("/api/borrowed-books", {
+        method: "POST",
+        body: JSON.stringify({
+          user_email: user.email,
+          book_id: book.id,
+        }),
+      });
 
-    const data = await response.json();
-
-    if (response.ok) {
-      await checkBorrowStatus();
-      onBorrowSuccess();
-    } else {
-      alert(data.error || "Failed to borrow book");
+      const data = await response.json();
+      if (response.ok) {
+        setHasBorrowed(true);
+        onBorrowSuccess();
+      } else {
+        setError(data.error || "Failed to borrow book");
+      }
+    } catch (error) {
+      setError("An error occurred while borrowing the book");
+    } finally {
+      setIsLoading(false);
     }
   };
 

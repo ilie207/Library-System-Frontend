@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../../lib/supabase";
 import { useRouter } from "next/navigation";
 
@@ -9,7 +9,21 @@ export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("Student");
+  const [csrfToken, setCsrfToken] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await fetch("/api/csrf/token");
+        const data = await response.json();
+        setCsrfToken(data.csrfToken);
+      } catch (error) {
+        console.error("Error fetching CSRF token:", error);
+      }
+    };
+    fetchCsrfToken();
+  }, []);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -33,6 +47,7 @@ export default function Signup() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
           email,
@@ -54,6 +69,8 @@ export default function Signup() {
   return (
     <form onSubmit={handleSignup} className="signup-form">
       <h2>Sign Up</h2>
+      <input type="hidden" name="csrfToken" value={csrfToken} />
+
       <div>
         <input
           type="text"
