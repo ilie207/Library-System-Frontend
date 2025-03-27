@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import NavBar from "../../components/NavBar";
 import BorrowBook from "../../components/BorrowBook";
 import ImageUpload from "../../components/ImageUpload";
+import { fetchWithCSRF } from "../../../lib/fetchWithCSRF";
 
 export default function BookPage({ params }) {
   const [book, setBook] = useState(null);
@@ -34,11 +35,8 @@ export default function BookPage({ params }) {
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`/api/books`, {
+    const response = await fetchWithCSRF(`/api/books`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: JSON.stringify(editedBook),
     });
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ImageUpload from "./ImageUpload";
 import config from "@/lib/config";
+import { fetchWithCSRF } from "../../lib/fetchWithCSRF";
 
 export default function AddBook() {
   const [bookData, setBookData] = useState({
@@ -23,25 +24,28 @@ export default function AddBook() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/books", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(bookData),
-    });
+    setIsLoading(true);
 
-    if (response.ok) {
-      alert("Book added successfully!");
-      setBookData({
-        title: "",
-        author: "",
-        total_copies: 0,
-        cover_image: "",
-        genre: "",
-        description: "",
+    try {
+      const response = await fetchWithCSRF("/api/books", {
+        method: "POST",
+        body: JSON.stringify(bookData),
       });
-      router.refresh();
+
+      if (response.ok) {
+        setBookData(initialBookData);
+        setSuccessMessage("Book added successfully!");
+        setError("");
+      } else {
+        const data = await response.json();
+        setError(data.error || "Failed to add book");
+        setSuccessMessage("");
+      }
+    } catch (error) {
+      setError("An error occurred while adding the book");
+      setSuccessMessage("");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -80,7 +84,7 @@ export default function AddBook() {
         required
       />
       <div className="image-upload-section">
-        <label className="white">Book Cover</label>
+        <label>Book Cover</label>
         <ImageUpload
           onUploadSuccess={handleImageUpload}
           fileName={bookData.cover_image}

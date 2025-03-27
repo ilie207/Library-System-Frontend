@@ -1,7 +1,7 @@
 .form-background {
   width: 100%;
   height: 100vh;
-  background: linear-gradient(to right, #141e30, #243b55);
+  background: linear-gradient(to right, #ffffff, #f5f5f5);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,13 +16,13 @@
 }
 
 .shape:first-child {
-  background: linear-gradient(#1845ad, #23a2f6);
+  background: linear-gradient(#e3f2fd, #bbdefb);
   left: -80px;
   top: -80px;
 }
 
 .shape:last-child {
-  background: linear-gradient(to right, #ff512f, #f09819);
+  background: linear-gradient(to right, #c5cae9, #9fa8da);
   right: -30px;
   bottom: -80px;
 }
@@ -32,15 +32,14 @@
   max-width: 400px;
   margin: 50px auto;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 10px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h2 {
-  color: #ffffff;
+  color: #333333;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -61,23 +60,12 @@
   width: 100%;
   padding: 12px;
   margin: 8px 0;
-  background: rgba(255, 255, 255, 0.07);
-  border: none;
+  color: #333333;
+  background: #ffffff;
+  border: 1px solid #dddddd;
   border-radius: 4px;
   font-size: 14px;
-}
-
-.form-tabs input,
-.form-tabs textarea,
-.form-tabs select {
-  color: #ffffff;
-}
-
-.edit-form-tabs input,
-.edit-form-tabs textarea,
-.edit-form-tabs select {
   color: #141e30;
-  border-color: #141e30;
 }
 
 .form-tabs button {
