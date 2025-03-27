@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { sanitiseObject } from "../../../lib/sanitise";
 
 const headers = {
   "Content-Type": "application/json",
@@ -26,12 +27,13 @@ export async function GET() {
 export async function POST(request) {
   const bookData = await request.json();
 
+  const sanitisedBookData = sanitiseObject(bookData);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/get-books`,
     {
       method: "POST",
       headers,
-      body: JSON.stringify(bookData),
+      body: JSON.stringify(sanitisedBookData),
     }
   );
 
@@ -42,12 +44,13 @@ export async function POST(request) {
 export async function PUT(request) {
   const bookData = await request.json();
 
+  const sanitisedBookData = sanitiseObject(bookData);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/get-books`,
     {
       method: "PUT",
       headers,
-      body: JSON.stringify(bookData),
+      body: JSON.stringify(sanitisedBookData),
     }
   );
 

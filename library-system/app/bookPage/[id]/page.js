@@ -9,6 +9,7 @@ import NavBar from "../../components/NavBar";
 import BorrowBook from "../../components/BorrowBook";
 import ImageUpload from "../../components/ImageUpload";
 import { fetchWithCSRF } from "../../../lib/fetchWithCSRF";
+import { sanitiseObject } from "../../../lib/sanitise";
 
 export default function BookPage({ params }) {
   const [book, setBook] = useState(null);
@@ -35,9 +36,11 @@ export default function BookPage({ params }) {
 
   const handleEdit = async (e) => {
     e.preventDefault();
+
+    const sanitisedEditedBook = sanitiseObject(editedBook);
     const response = await fetchWithCSRF(`/api/books`, {
       method: "PUT",
-      body: JSON.stringify(editedBook),
+      body: JSON.stringify(sanitisedEditedBook),
     });
 
     if (response.ok) {

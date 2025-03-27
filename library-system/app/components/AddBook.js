@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import ImageUpload from "./ImageUpload";
 import config from "@/lib/config";
 import { fetchWithCSRF } from "../../lib/fetchWithCSRF";
+import { sanitiseObject } from "../../lib/sanitise";
 
 export default function AddBook() {
   const [bookData, setBookData] = useState({
@@ -27,9 +28,10 @@ export default function AddBook() {
     setIsLoading(true);
 
     try {
+      const sanitisedBookData = sanitiseObject(bookData);
       const response = await fetchWithCSRF("/api/books", {
         method: "POST",
-        body: JSON.stringify(bookData),
+        body: JSON.stringify(sanitisedBookData),
       });
 
       if (response.ok) {

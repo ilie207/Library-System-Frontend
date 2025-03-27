@@ -5,13 +5,16 @@ import { cookies } from "next/headers";
 export async function GET() {
   const { secret, token } = generateToken();
 
+  const response = NextResponse.json({ csrfToken: token });
   // storing the secret in an HTTP-only cookie
-  cookies().set("csrf_secret", secret, {
+  response.cookies.set({
+    name: "csrf_secret",
+    value: secret,
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict",
     path: "/",
   });
 
-  return NextResponse.json({ csrfToken: token });
+  return response;
 }
