@@ -10,7 +10,7 @@ export default function BorrowBook({ user, book, onBorrowSuccess }) {
   const checkBorrowStatus = async () => {
     if (!user?.email) return;
 
-    const response = await fetch(
+    const response = await fetchWithCSRF(
       `/api/borrowed-books?email=${user.email}&bookId=${book.id}`
     );
     const data = await response.json();
