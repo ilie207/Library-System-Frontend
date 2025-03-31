@@ -15,7 +15,6 @@ export default function LibraryOverview() {
   useEffect(() => {
     const fetchLibraryStats = async () => {
       try {
-        // Fetch books data with error handling
         let books = [];
         try {
           const booksResponse = await fetchWithCSRF("/api/books");
@@ -28,11 +27,10 @@ export default function LibraryOverview() {
           books = [];
         }
 
-        // Fetch borrowed books data with error handling
         let borrowedData = { totalBorrowed: 0, pendingReturns: 0 };
         try {
           const borrowedResponse = await fetchWithCSRF(
-            "/api/borrowed-books?stats=true"
+            "/api/borrowed-books/stats"
           );
           if (!borrowedResponse.ok) {
             throw new Error(
@@ -45,7 +43,7 @@ export default function LibraryOverview() {
           console.error("Error fetching borrowed books:", error);
         }
 
-        // Calculate statistics safely
+        // books statistics
         const totalBooks = Array.isArray(books) ? books.length : 0;
         const availableBooks = Array.isArray(books)
           ? books.reduce((sum, book) => sum + (book.available || 0), 0)

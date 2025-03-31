@@ -5,13 +5,14 @@ import { fetchWithCSRF } from "../../lib/fetchWithCSRF";
 export default function BorrowBook({ user, book, onBorrowSuccess }) {
   const [hasBorrowed, setHasBorrowed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const checkBorrowStatus = async () => {
     if (!user?.email) return;
 
-    const response = await fetch(
-      `/api/borrowed-books?email=${user.email}&bookId=${book.id}`
+    const response = await fetchWithCSRF(
+      `/api/borrowed-books?email=${encodeURIComponent(user.email)}&bookId=${
+        book.id
+      }`
     );
     const data = await response.json();
     setHasBorrowed(data.hasBorrowed);
@@ -37,10 +38,15 @@ export default function BorrowBook({ user, book, onBorrowSuccess }) {
         setHasBorrowed(true);
         onBorrowSuccess();
       } else {
-        setError(data.error || "Failed to borrow book");
+        if (data.error === "Already borrowed") {
+          alert("You have already borrowed this book");
+          checkBorrowStatus();
+        } else {
+          alert(data.error || "Failed to borrow book");
+        }
       }
     } catch (error) {
-      setError("An error occurred while borrowing the book");
+      alert("An error occurred while borrowing the book");
     } finally {
       setIsLoading(false);
     }
