@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, differenceInDays } from "date-fns";
 
 export default function RecentActivity() {
   const [activities, setActivities] = useState([]);
@@ -62,8 +62,10 @@ export default function RecentActivity() {
             user_name:
               `${user?.f_name || ""} ${user?.l_name || ""}`.trim() ||
               "Unknown User",
-            created_at: item.return_date || item.borrow_date,
+            created_at:
+              item.actual_return || item.return_date || item.borrow_date,
             borrow_date: item.borrow_date,
+            actual_return: item.actual_return,
             book_id: item.book_id,
             user_email: item.user_email,
           };
@@ -158,17 +160,10 @@ export default function RecentActivity() {
 
   const formatReturnTimestamp = (activity) => {
     try {
-      if (
-        activity.type === "return" &&
-        activity.borrow_date &&
-        activity.created_at
-      ) {
-        // days after borrowing the book was returned
+      if (activity.type === "return" && activity.borrow_date) {
+        const returnDate = new Date(activity.actual_return);
         const borrowDate = new Date(activity.borrow_date);
-        const returnDate = new Date(activity.created_at);
-        const daysToReturn = Math.round(
-          (returnDate - borrowDate) / (1000 * 60 * 60 * 24)
-        );
+        const daysToReturn = differenceInDays(returnDate, borrowDate);
 
         if (daysToReturn <= 0) {
           return "returned same day";
@@ -178,8 +173,9 @@ export default function RecentActivity() {
           return `returned after ${daysToReturn} days`;
         }
       }
+      return "";
     } catch (error) {
-      return "Unknown time";
+      return "Unknown duration";
     }
   };
 

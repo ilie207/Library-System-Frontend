@@ -60,7 +60,6 @@
   width: 100%;
   padding: 12px;
   margin: 8px 0;
-  color: #333333;
   background: #ffffff;
   border: 1px solid #dddddd;
   border-radius: 4px;
@@ -88,7 +87,7 @@
 .signup-link {
   text-align: center;
   margin-top: 20px;
-  color: #ffffff;
+  color: #141e30;
 }
 
 .auth-link {
@@ -102,9 +101,6 @@
   color: #64b5f6;
 }
 
-.white {
-  color: #ffffff;
-}
 /*Image upload*/
 .image-upload-section {
   margin: 1rem 0;
