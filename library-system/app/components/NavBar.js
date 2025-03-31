@@ -24,9 +24,11 @@ export default function NavBar() {
         <Link href="/allBooks" className="custom_button">
           All Books
         </Link>
-        <Link href="/addBook" className="custom_button">
-          Add Book
-        </Link>
+        {role === "Librarian" && (
+          <Link href="/addBook" className="custom_button">
+            Add Book
+          </Link>
+        )}
       </ul>
     </nav>
   );

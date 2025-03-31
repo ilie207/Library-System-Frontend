@@ -146,12 +146,14 @@ export default function BookPage({ params }) {
                   />
                 )}
                 {user && role === "Librarian" && (
-                  <button
-                    onClick={() => setIsEditing(true)}
-                    className="custom_button"
-                  >
-                    Edit Book
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => setIsEditing(true)}
+                      className="custom_button"
+                    >
+                      Edit Book
+                    </button>
+                  </div>
                 )}
                 <p className="genre">Genre: {book.genre}</p>
                 <h3>Description</h3>
