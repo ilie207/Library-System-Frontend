@@ -13,7 +13,7 @@ const NewBooks = () => {
 
   const fetchLatestBooks = async () => {
     const allBooks = await getBooks();
-    // Sort books by created_at and get the latest one
+    // sorted books by created_at to get the latest one
     const latestBooks = allBooks
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       .slice(0, 3);
