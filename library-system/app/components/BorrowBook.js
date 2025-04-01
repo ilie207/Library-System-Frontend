@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { fetchWithCSRF } from "../../lib/fetchWithCSRF";
 
 export default function BorrowBook({ user, book, onBorrowSuccess }) {
