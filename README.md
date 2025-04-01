@@ -6,20 +6,19 @@ This frontend repository is part of the Learner's Library project, a comprehensi
 
 ## Table of Contents
 
-[Introduction](#introduction)
-
+- [Introduction](#introduction)
 - [Installation & Usage Instructions](#installation--usage-instructions)
-  - [Prerequisites](#prerequisites)
-  - [Setup Steps](#setup-steps)
-    [Project Aim & Objectives](#project-aim--objectives)
-    [Enterprise Considerations](#enterprise-considerations)
-  - [Performance](#performance)
-  - [Scalability](#scalability)
-  - [Robustness](#robustness)
-  - [Security](#security)
-  - [Deployment](#deployment)
-    [Feature Overview](#feature-overview)
-    [Known Issues & Future Enhancements](#known-issues--future-enhancements)
+- [Prerequisites](#prerequisites)
+- [Setup Steps](#setup-steps)
+- [Project Aim & Objectives](#project-aim--objectives)
+- [Enterprise Considerations](#enterprise-considerations)
+- [Performance](#performance)
+- [Scalability](#scalability)
+- [Robustness](#robustness)
+- [Security](#security)
+- [Deployment](#deployment)
+- [Feature Overview](#feature-overview)
+- [Known Issues & Future Enhancements](#known-issues--future-enhancements)
 
 ## Introduction
 
