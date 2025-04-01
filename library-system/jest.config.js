@@ -9,6 +9,10 @@ const customJestConfig = {
   testEnvironment: "jest-environment-jsdom",
   coverageProvider: "v8",
   testMatch: ["**/*.test.js"],
+  moduleNameMapper: {
+    "^lib/(.*)$": "<rootDir>/lib/$1",
+    "^app/(.*)$": "<rootDir>/app/$1",
+  },
 };
 
 module.exports = createJestConfig(customJestConfig);
