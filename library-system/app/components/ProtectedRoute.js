@@ -15,7 +15,7 @@ export default function ProtectedRoute({ children, allowedRole }) {
         router.push("/unauthorized");
       }
     }
-  }, [user, role, loading]);
+  }, [user, role, loading, allowedRole, router]);
 
   if (loading) return null;
   return user && role.toLowerCase() === allowedRole.toLowerCase()
