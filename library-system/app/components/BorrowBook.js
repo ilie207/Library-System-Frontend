@@ -6,21 +6,19 @@ export default function BorrowBook({ user, book, onBorrowSuccess }) {
   const [hasBorrowed, setHasBorrowed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const checkBorrowStatus = async () => {
+  const checkBorrowStatus = useCallback(async () => {
     if (!user?.email) return;
 
     const response = await fetchWithCSRF(
-      `/api/borrowed-books?email=${encodeURIComponent(user.email)}&bookId=${
-        book.id
-      }`
+      `/api/borrowed-books?email=${user.email}&bookId=${book.id}`
     );
     const data = await response.json();
     setHasBorrowed(data.hasBorrowed);
-  };
+  }, [user?.email, book?.id]);
 
   useEffect(() => {
     checkBorrowStatus();
-  }, [user?.email, book.id]);
+  }, [checkBorrowStatus]);
 
   const handleBorrow = async () => {
     setIsLoading(true);
