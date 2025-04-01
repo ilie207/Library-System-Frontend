@@ -142,7 +142,7 @@ export default function Signup() {
         <div>
           <input
             type="password"
-            placeholder="Librarian Authorization Code"
+            placeholder="Librarian Authorisation Code"
             value={librarianCode}
             onChange={(e) => setLibrarianCode(e.target.value)}
             required

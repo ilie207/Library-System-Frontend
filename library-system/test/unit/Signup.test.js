@@ -41,7 +41,7 @@ describe("Signup Component", () => {
     const { getByPlaceholderText, getByRole, getByText } = render(<Signup />);
 
     fireEvent.change(getByRole("combobox"), { target: { value: "Librarian" } });
-    fireEvent.change(getByPlaceholderText("Librarian Authorization Code"), {
+    fireEvent.change(getByPlaceholderText("Librarian Authorisation Code"), {
       target: { value: "wrong-code" },
     });
 
@@ -110,14 +110,14 @@ describe("Signup Component", () => {
       <Signup />
     );
 
-    expect(queryByPlaceholderText("Librarian Authorization Code")).toBeNull();
+    expect(queryByPlaceholderText("Librarian Authorisation Code")).toBeNull();
 
     fireEvent.change(getByRole("combobox"), { target: { value: "Librarian" } });
     expect(
-      getByPlaceholderText("Librarian Authorization Code")
+      getByPlaceholderText("Librarian Authorisation Code")
     ).toBeInTheDocument();
 
     fireEvent.change(getByRole("combobox"), { target: { value: "Student" } });
-    expect(queryByPlaceholderText("Librarian Authorization Code")).toBeNull();
+    expect(queryByPlaceholderText("Librarian Authorisation Code")).toBeNull();
   });
 });
