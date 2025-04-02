@@ -65,7 +65,7 @@ export default function BookPage({ params }) {
               alt={book.title}
             />
           </div>
-          <div className="bookInfo">
+          <div className="bookPageInfo">
             {isEditing ? (
               <form onSubmit={handleEdit} className="edit-form-tabs">
                 <input
