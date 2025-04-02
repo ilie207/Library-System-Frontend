@@ -4,6 +4,7 @@ import "../styles/books.css";
 import "../styles/forms.css";
 import "../styles/dashboard.css";
 import "../styles/activity.css";
+import "../styles/search.css";
 import { AuthProvider } from "../lib/AuthContext";
 
 const geistSans = Geist({

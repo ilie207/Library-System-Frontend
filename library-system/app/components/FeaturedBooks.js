@@ -16,7 +16,7 @@ const FeaturedBooks = () => {
     // Sort books by availability
     const topBooks = allBooks
       .sort((a, b) => b.available - a.available)
-      .slice(0, 3);
+      .slice(0, 4);
     setHighlightedBooks(topBooks);
   };
 
@@ -25,7 +25,10 @@ const FeaturedBooks = () => {
       <h2>Featured Books</h2>
       <div className="bookGrid">
         {highlightedBooks.map((book) => (
-          <BookCard key={book.id} book={book} />
+          <div key={book.id} className="book-wrapper">
+            <div className="featured-ribbon">Featured</div>
+            <BookCard book={book} />
+          </div>
         ))}
       </div>
     </section>

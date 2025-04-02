@@ -16,7 +16,7 @@ const NewBooks = () => {
     // sorted books by created_at to get the latest one
     const latestBooks = allBooks
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-      .slice(0, 3);
+      .slice(0, 4);
     setNewBooks(latestBooks);
   };
 
@@ -25,7 +25,10 @@ const NewBooks = () => {
       <h2>New Arrivals</h2>
       <div className="bookGrid">
         {newBooks.map((book) => (
-          <BookCard key={book.id} book={book} />
+          <div key={book.id} className="book-wrapper">
+            <div className="new-ribbon">New</div>
+            <BookCard book={book} />
+          </div>
         ))}
       </div>
     </section>
