@@ -57,3 +57,38 @@ export async function PUT(request) {
   const data = await response.json();
   return NextResponse.json(data);
 }
+
+export async function DELETE(request) {
+  const url = new URL(request.url);
+  const bookId = url.searchParams.get("id");
+
+  if (!bookId) {
+    return NextResponse.json({ error: "Book ID is required" }, { status: 400 });
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/get-books/${bookId}`,
+      {
+        method: "DELETE",
+        headers,
+      }
+    );
+
+    const data = await response.json();
+
+    if (data.error) {
+      return NextResponse.json(
+        { error: data.error },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to delete book" },
+      { status: 500 }
+    );
+  }
+}

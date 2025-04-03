@@ -150,3 +150,28 @@ nav {
   font-size: 15px;
   color: white;
 }
+
+.librarian-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px;
+}
+
+.delete-button {
+  background-color: #d9534f;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c9302c;
+}
+
+.error-message {
+  color: #d9534f;
+  margin-top: 10px;
+  font-weight: bold;
+}
