@@ -7,16 +7,20 @@ import { getBooks } from "../../../lib/api";
 import Header from "../../components/Header";
 import NavBar from "../../components/NavBar";
 import BorrowBook from "../../components/BorrowBook";
-import ImageUpload from "../../components/ImageUpload";
-import { fetchWithCSRF } from "../../../lib/fetchWithCSRF";
-import { sanitiseObject } from "../../../lib/sanitise";
+import { useRouter } from "next/navigation";
+import { handleBookEdit } from "../../../lib/bookOperations/editBook";
+import { confirmAndDeleteBook } from "../../../lib/bookOperations/deleteBook";
+import BookForm from "@/app/components/BookForm";
 
 export default function BookPage({ params }) {
   const [book, setBook] = useState(null);
   const { user, role } = useAuth();
   const [isEditing, setIsEditing] = useState(false);
   const [editedBook, setEditedBook] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
   const bookId = use(params).id;
+  const router = useRouter();
 
   useEffect(() => {
     fetchBookDetails(bookId);
@@ -36,18 +40,17 @@ export default function BookPage({ params }) {
 
   const handleEdit = async (e) => {
     e.preventDefault();
+    await handleBookEdit(
+      editedBook,
+      setIsEditing,
+      setBook,
+      fetchBookDetails,
+      bookId
+    );
+  };
 
-    const sanitisedEditedBook = sanitiseObject(editedBook);
-    const response = await fetchWithCSRF(`/api/books`, {
-      method: "PUT",
-      body: JSON.stringify(sanitisedEditedBook),
-    });
-
-    if (response.ok) {
-      setIsEditing(false);
-      setBook(editedBook);
-      fetchBookDetails(bookId);
-    }
+  const handleDelete = () => {
+    confirmAndDeleteBook(bookId, setIsDeleting, setDeleteError, router);
   };
 
   if (!book) return <div>Loading...</div>;
@@ -67,64 +70,12 @@ export default function BookPage({ params }) {
           </div>
           <div className="bookPageInfo">
             {isEditing ? (
-              <form onSubmit={handleEdit} className="edit-form-tabs">
-                <input
-                  type="text"
-                  value={editedBook.title}
-                  onChange={(e) =>
-                    setEditedBook({ ...editedBook, title: e.target.value })
-                  }
-                />
-                <input
-                  type="text"
-                  value={editedBook.author}
-                  onChange={(e) =>
-                    setEditedBook({ ...editedBook, author: e.target.value })
-                  }
-                />
-                <input
-                  type="number"
-                  value={editedBook.total_copies}
-                  onChange={(e) =>
-                    setEditedBook({
-                      ...editedBook,
-                      total_copies: parseInt(e.target.value),
-                    })
-                  }
-                />
-                <ImageUpload
-                  onUploadSuccess={(url) =>
-                    setEditedBook({ ...editedBook, cover_image: url })
-                  }
-                />
-                <input
-                  type="text"
-                  value={editedBook.genre}
-                  onChange={(e) =>
-                    setEditedBook({ ...editedBook, genre: e.target.value })
-                  }
-                />
-                <textarea
-                  value={editedBook.description}
-                  onChange={(e) =>
-                    setEditedBook({
-                      ...editedBook,
-                      description: e.target.value,
-                    })
-                  }
-                />
-                <div className="edit-buttons">
-                  <button type="submit" className="custom_button">
-                    Save Changes
-                  </button>
-                  <button
-                    onClick={() => setIsEditing(false)}
-                    className="custom_button"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
+              <BookForm
+                editedBook={editedBook}
+                setEditedBook={setEditedBook}
+                handleSubmit={handleEdit}
+                onCancel={() => setIsEditing(false)}
+              />
             ) : (
               <>
                 <h1>{book.title}</h1>
@@ -146,13 +97,23 @@ export default function BookPage({ params }) {
                   />
                 )}
                 {user && role === "Librarian" && (
-                  <div>
+                  <div className="librarian-actions">
                     <button
                       onClick={() => setIsEditing(true)}
                       className="custom_button"
                     >
                       Edit Book
                     </button>
+                    <button
+                      onClick={handleDelete}
+                      className="custom_button delete-button"
+                      disabled={isDeleting}
+                    >
+                      {isDeleting ? "Deleting..." : "Delete Book"}
+                    </button>
+                    {deleteError && (
+                      <div className="error-message">{deleteError}</div>
+                    )}
                   </div>
                 )}
                 <p className="genre">Genre: {book.genre}</p>
