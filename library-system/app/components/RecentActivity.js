@@ -98,12 +98,6 @@ export default function RecentActivity() {
         return "📚";
       case "return":
         return "📖";
-      case "add_book":
-        return "📝";
-      case "remove_book":
-        return "❌";
-      case "edit_book":
-        return "✏️";
       default:
         return "🔔";
     }
@@ -124,24 +118,6 @@ export default function RecentActivity() {
           <>
             <strong>{activity.book_title}</strong> was returned by{" "}
             {activity.user_name}
-          </>
-        );
-      case "add_book":
-        return (
-          <>
-            Librarian added a new book: <strong>{activity.book_title}</strong>
-          </>
-        );
-      case "remove_book":
-        return (
-          <>
-            Librarian removed: <strong>{activity.book_title}</strong>
-          </>
-        );
-      case "edit_book":
-        return (
-          <>
-            Librarian updated: <strong>{activity.book_title}</strong>
           </>
         );
       default:
