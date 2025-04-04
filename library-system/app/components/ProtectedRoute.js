@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children, allowedRole }) {
       if (!user) {
         router.push("/");
       } else if (role.toLowerCase() !== allowedRole.toLowerCase()) {
-        router.push("/unauthorized");
+        router.push("/unauthorised");
       }
     }
   }, [user, role, loading, allowedRole, router]);

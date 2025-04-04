@@ -1,7 +1,6 @@
 "use client";
 import { useAuth } from "../../lib/AuthContext";
 import { supabase } from "../../lib/supabase";
-import { useRouter } from "next/navigation";
 
 export default function SignOutButton() {
   const { signOut } = useAuth();

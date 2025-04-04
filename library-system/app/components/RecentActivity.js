@@ -193,9 +193,6 @@ export default function RecentActivity() {
     <div className="activity-feed">
       <div className="activity-header">
         <h2>📜 Recent Activity</h2>
-        <Link href="/activity-history" className="view-all-link">
-          View All
-        </Link>
       </div>
 
       <div className="activity-list">
