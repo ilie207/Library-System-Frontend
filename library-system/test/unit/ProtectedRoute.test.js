@@ -69,7 +69,7 @@ describe("ProtectedRoute Component", () => {
     );
 
     await waitFor(() => {
-      expect(mockRouter.push).toHaveBeenCalledWith("/unauthorized");
+      expect(mockRouter.push).toHaveBeenCalledWith("/unauthorised");
     });
   });
 

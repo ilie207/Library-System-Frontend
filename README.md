@@ -17,7 +17,8 @@ This frontend repository is part of the Learner's Library project, a comprehensi
 - [Robustness](#robustness)
 - [Security](#security)
 - [Deployment](#deployment)
-- [Feature Overview](#feature-overview)
+- [Implemented Features](#implemented-features)
+- [System Overview](#system-overview)
 - [Known Issues & Future Enhancements](#known-issues--future-enhancements)
 
 ## Introduction
@@ -113,11 +114,20 @@ Learner's Library is a modern, web-based library management system built with Ne
 ### Deployment
 
 - Supabase for database and authentication services
-- Edge functions for serverless API capabilities
+- Edge functions on Supabase for serverless API capabilities
 - ImageKit for image storage and optimisation
-- Deployment on Render for the frontend application pending..
+- Deployment on Render for the frontend application
 
-## Feature Overview
+## Implemented Features:
+
+- Search functionality for books
+- User authentication and role-based access control
+- Books borrowing for students
+- Book management for librarians (add, update, delete)
+- Statistics and analytics for librarians
+- Overview of recent activities for librarians
+
+## System Overview
 
 ### Authentication System
 
@@ -154,6 +164,7 @@ Learner's Library is a modern, web-based library management system built with Ne
 ### Known Issues
 
 - Limited mobile responsiveness in some dashboard views
+- Currently anyone is able to sign up for a student account
 
 ### Future Enhancements
 
