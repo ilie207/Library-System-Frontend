@@ -31,7 +31,7 @@ Learner's Library is a modern, web-based library management system built with Ne
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v20 or higher)
 - npm or yarn package manager
 - Supabase account for database and authentication
 - ImageKit account for image management (optional)
