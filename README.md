@@ -170,7 +170,6 @@ Learner's Library is a modern, web-based library management system built with Ne
 
 - Add email notifications for due dates and borrow confirmation
 - Implement book recommendations based on borrowing history
-- Implement search functionality for books
 - Integrate with external book databases for richer metadata
 - Create a more comprehensive reporting system for librarians
 - Develop a fine management system for overdue books
