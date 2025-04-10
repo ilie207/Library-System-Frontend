@@ -25,7 +25,7 @@ This frontend repository is part of the Learner's Library project, a comprehensi
 
 ### Solution Overview
 
-Learner's Library is a modern, web-based library management system built with Next.js. This system provides a seamless experience for both students and librarians. The application enables users to browse, borrow, and manage books while giving librarians tools to add books to the system, oversee the library's collection and latest user activities.
+Learner's Library is a modern, web-based library management system, which I have built with the use of Next.js framework. This system provides a seamless experience for both students and librarians. The application was developed to enable students to browse, search, and borrow books from the library in a modern and easy way. The application will also enable librarians to manage the library's inventory, by allowing them to add books to the system, as well as edit, and delete them. In addition to that the librarins will be able to oversee the library's collection, the statistics of the library and latest user activities such as book returns and book borrows.
 
 ## Installation & Usage Instructions
 
@@ -34,8 +34,8 @@ Learner's Library is a modern, web-based library management system built with Ne
 - Node.js (v20 or higher)
 - npm or yarn package manager
 - Supabase account for database and authentication
-- ImageKit account for image management (optional)
-- Backend codebase for Supabase edge-functions.
+- ImageKit account for image management
+- Backend codebase for Supabase edge-functions. [Use the following backend repository.](https://github.com/ilie207/Library-System-Backend)
 
 ### Setup Steps
 
@@ -71,15 +71,16 @@ Learner's Library is a modern, web-based library management system built with Ne
 
 ### Project Aim & Objectives
 
-**Main Goal:** Create an intuitive and efficient library management system that simplifies book borrowing and administration processes.
+**Main Goal:** Create an intuitive and efficient library management system that simplifies book borrowing and administration processes, for both students and librarians.
 
 **Key Objectives:**
 
-1. Implement secure user authentication with role-based access control
+1. Implement secure user authentication with role-based access control (students vs. librarians)
 2. Provide a responsive and intuitive user interface for browsing and borrowing books
 3. Enable librarians to manage book inventory and track borrowing activities
-4. Ensure data integrity and security throughout the application
-5. Create a scalable architecture that can grow with increasing users and books
+4. Implement search functionallity for books
+5. Ensure data integrity and security throughout the application
+6. Create a scalable architecture that can grow with increasing users and books
 
 ## Enterprise Considerations
 
@@ -102,10 +103,11 @@ Learner's Library is a modern, web-based library management system built with Ne
 - Comprehensive error handling throughout the application
 - Fallback UI states for loading and error conditions
 - Data validation on both client and server sides
+- CI/CD pipeline for automated testing
 
 ### Security
 
-- JWT-based authentication using Supabase Auth
+- [JWT-based](https://supabase.com/docs/guides/auth/sessions) authentication using Supabase Auth
 - CSRF protection for all state-changing operations
 - Input sanitisation to prevent XSS attacks
 - Secure environment variable management
