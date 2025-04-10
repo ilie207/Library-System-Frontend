@@ -102,14 +102,14 @@ Learner's Library is a modern, web-based library management system, which I have
 
 - Comprehensive error handling throughout the application
 - Fallback UI states for loading and error conditions
-- Data validation on both client and server sides
-- CI/CD pipeline for automated testing
+- Data validation on both [client side](./library-system/app/components/Signup.js) and [server side](./library-system/lib/sanitise.js)
+- [CI/CD pipeline](.github/workflows/next.js.yml) for automated testing
 
 ### Security
 
 - [JWT-based](https://supabase.com/docs/guides/auth/sessions) authentication using Supabase Auth
-- CSRF protection for all state-changing operations
-- Input sanitisation to prevent XSS attacks
+- [CSRF protection](./library-system/lib/csrf.js) for all state-changing operations [PUT, POST, DELETE]
+- [Input sanitisation](./library-system/lib/sanitise.js) to prevent XSS attacks
 - Secure environment variable management
 - Role-based access control for different user types (students vs. librarians)
 
@@ -122,12 +122,12 @@ Learner's Library is a modern, web-based library management system, which I have
 
 ## Implemented Features:
 
-- Search functionality for books
-- User authentication and role-based access control
-- Books borrowing for students
-- Book management for librarians (add, update, delete)
-- Statistics and analytics for librarians
-- Overview of recent activities for librarians
+- Search functionality for books, this allows users to find books they are interested in based on the book title, author, or genre.
+- User authentication and role-based access control, this ensures that only authorized users can access certain features and data.
+- Books borrowing for students, this allows students to borrow available books from the library.
+- Book management for librarians (add, update, delete), this allows librarians to manage the book inventory, including adding new books, updating existing books, and deleting books that are no longer available.
+- Statistics and analytics for librarians, this provides librarians with insights into the total amount of books within the library, books availability, amount of borrowed books, and pending returns.
+- Overview of recent activities for librarians, this provides librarians with a quick overview of recent activities, such as book returns, and book reservations.
 
 ## System Overview
 
@@ -170,12 +170,13 @@ Learner's Library is a modern, web-based library management system, which I have
 
 ### Future Enhancements
 
-- Add email notifications for due dates and borrow confirmation
-- Implement book recommendations based on borrowing history
-- Integrate with external book databases for richer metadata
-- Create a more comprehensive reporting system for librarians
-- Develop a fine management system for overdue books
-- Implement a book reservation feature for unavailable books
+- Add email notifications for due dates and borrow confirmation, to improve user engagement and communication.
+- Implement user account management and profile settings, to allow users to update personal information, and change passwords.
+- Implement book recommendations based on borrowing history, this will help users discover new books based on their reading preferences.
+- Integrate with external book databases for richer metadata, this will help students find books more easily.
+- Create a more comprehensive reporting system for librarians, to provide more detailed insights into library usage and book circulation, as well as new book additions or book removals.
+- Develop a fine management system for overdue books, to encourage timely returns and manage overdue fees.
+- Implement a book reservation feature for unavailable books, this will allow users to reserve books that are currently fully borrowed.
 
 ---
 
